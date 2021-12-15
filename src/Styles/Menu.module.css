@@ -1,0 +1,16 @@
+.menu {
+  grid-area: menuBar;
+  background-color: rgba(180, 200, 220, 1);
+  font-size: 24px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.active {
+  font-style: italic;
+  font-weight: bold;
+  color: rgba(90, 30, 255, 1);
+}

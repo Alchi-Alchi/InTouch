@@ -1,0 +1,12 @@
+.profile {
+  grid-area: profile;
+  background-color: rgba(240, 240, 240, 1);
+  display: grid;
+  grid-template-areas: 
+  "photo name"
+  "photo info"
+  "userContent userContent";
+  grid-template-rows: 1fr 2fr 3fr;
+  grid-template-columns: 3fr 5fr;
+  grid-gap: 3px;
+}

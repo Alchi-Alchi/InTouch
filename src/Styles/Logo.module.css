@@ -1,0 +1,17 @@
+.logo {
+  grid-area: logo;
+  background-color: rgba(180, 200, 220, 1);
+}
+
+.logo img {
+  width: 90px;
+  margin: 10px;
+}
+
+#logo_name {
+  font-size: 32px;
+}
+
+#headerContent_wrapper {
+  display: flex;
+}

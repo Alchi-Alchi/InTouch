@@ -1,0 +1,33 @@
+.dialogs_wrapper {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+}
+
+.dialogs p {
+  text-align: center;
+  font-size: 24px;
+  background-color: rgba(180, 200, 200, 1);
+  margin: 0 0 3px 0;
+  padding: 15px;
+}
+
+.contact {
+  padding: 15px;
+  font-weight: bold;
+}
+
+.contact:not(:last-child), .message:not(:last-child) {
+  border-bottom: 1px solid rgba(150, 150, 150, 1);
+}
+
+.message {
+  padding: 15px;
+}
+
+.contacts {
+  background-color: rgba(140, 170, 200, 1);
+}
+
+.messages {
+  background-color: rgba(160, 180, 200, 1);
+}
