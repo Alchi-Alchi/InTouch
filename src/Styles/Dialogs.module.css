@@ -31,3 +31,17 @@
 .messages {
   background-color: rgba(160, 180, 200, 1);
 }
+
+#sendTools {
+  text-align: center;
+  background-color: rgba(230, 230, 230, 1);
+}
+
+#postWindow {
+  margin: 10px;
+  padding: 10px;
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px 3px rgba(200, 200, 200, 1);
+}

@@ -3,14 +3,19 @@ import classes from '../Styles/Content.module.css';
 import Post from './Post';
 
 const Content = (props) => {
-  let postsArr = props.myPosts.map (p => <Post message = {p.post}/>)
+  let postsArr = props.myPosts.map (p => <Post message = {p.post}/>);
+  let createPostWindow = React.createRef();
+  let addPost = () => {
+    let textPost = createPostWindow.current.value;
+    alert (textPost)
+  }
   return (
   <div className={classes.content}>
     <div className={classes.title}>Messages</div>
     {postsArr}
     <div className={classes.sendTools}>
-      <textarea id={classes.postWindow} placeholder="Message..."></textarea> <br />
-      <button id={classes.btn}>Send</button>
+      <textarea id={classes.postWindow} placeholder="Message..." ref={createPostWindow}></textarea> <br />
+      <button id={classes.btn} onClick={addPost}>Send</button>
     </div>
   </div>
   );

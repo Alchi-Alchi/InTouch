@@ -27,6 +27,10 @@ const Dialogs = (props) => {
         {messagesArr}
       </div>
     </div>
+    <div id={classes.sendTools}>
+      <textarea id={classes.postWindow} placeholder='Message...'></textarea> <br />
+      <button>Send</button>
+    </div> 
   </div>
 };
 export default Dialogs;
