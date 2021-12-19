@@ -7,7 +7,8 @@ const Content = (props) => {
   let createPostWindow = React.createRef();
   let addPost = () => {
     let textPost = createPostWindow.current.value;
-    alert (textPost)
+    props.addPost (textPost)
+    createPostWindow.current.value = '';
   }
   return (
   <div className={classes.content}>
