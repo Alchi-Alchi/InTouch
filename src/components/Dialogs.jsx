@@ -29,7 +29,7 @@ const Dialogs = (props) => {
     </div>
     <div id={classes.sendTools}>
       <textarea id={classes.postWindow} placeholder='Message...'></textarea> <br />
-      <button>Send</button>
+      <button id={classes.btn}>Send</button>
     </div> 
   </div>
 };

@@ -6,16 +6,18 @@ const Content = (props) => {
   let postsArr = props.myPosts.map (p => <Post message = {p.post}/>);
   let createPostWindow = React.createRef();
   let addPost = () => {
+    props.addPost ();
+  }
+  let textWindowChange = () => {
     let textPost = createPostWindow.current.value;
-    props.addPost (textPost)
-    createPostWindow.current.value = '';
+    props.updatePost (textPost);
   }
   return (
   <div className={classes.content}>
     <div className={classes.title}>Messages</div>
     {postsArr}
     <div className={classes.sendTools}>
-      <textarea id={classes.postWindow} placeholder="Message..." ref={createPostWindow}></textarea> <br />
+      <textarea id={classes.postWindow} placeholder="Message..." ref={createPostWindow} onChange={textWindowChange} value={props.newPostText}/> <br />
       <button id={classes.btn} onClick={addPost}>Send</button>
     </div>
   </div>
