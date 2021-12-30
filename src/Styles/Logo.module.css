@@ -1,11 +1,15 @@
-.logo {
+.header {
   grid-area: logo;
   background-color: rgba(180, 200, 220, 1);
 }
 
-.logo img {
+.header img {
   width: 90px;
   margin: 10px;
+}
+
+#logo {
+  display: flex;
 }
 
 #logo_name {
@@ -14,4 +18,12 @@
 
 #headerContent_wrapper {
   display: flex;
+  justify-content: space-between;
+}
+
+#profileIMG {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 30px;
 }

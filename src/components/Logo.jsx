@@ -1,11 +1,15 @@
 import React from 'react';
 import logoIMG from '../images/logo.png';
+import avatar from '../images/myAvatar.png';
 import classes from '../Styles/Logo.module.css';
 const Logo = () => {
-  return <header className={classes.logo}>
+  return <header className={classes.header}>
     <div id={classes.headerContent_wrapper}>
-      <img src={logoIMG} alt="logo" />
-      <p id={classes.logo_name}>InTouch</p>
+      <div id={classes.logo}>
+        <img src={logoIMG} alt="logo" />
+        <p id={classes.logo_name}>InTouch</p>
+      </div>
+      <img src={avatar} id={classes.profileIMG} alt="I" />
     </div>
   </header>
 };
