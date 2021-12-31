@@ -6,11 +6,11 @@ const Content = (props) => {
   let postsArr = props.myPosts.map (p => <Post message = {p.post}/>);
   let createPostWindow = React.createRef();
   let addPost = () => {
-    props.addPost ();
+    props.dispatch ({type: 'ADD-POST'});
   }
   let textWindowChange = () => {
     let textPost = createPostWindow.current.value;
-    props.updatePost (textPost);
+    props.dispatch ({type: 'UPDATE-POST', myNewText: textPost});
   }
   return (
   <div className={classes.content}>

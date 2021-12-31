@@ -43,7 +43,22 @@ let store = {
 //
   subscribe (observer) {
     this._callSubscriber = observer;
-  }
+  },
+//  
+  dispatch (action) {
+    if (action.type === 'ADD-POST') {
+      let newPost = {
+        id: 3,
+        post: this._state.profilePage.newPostText
+      };
+      this._state.profilePage.myPosts.push (newPost);
+      this._state.profilePage.newPostText = '';
+      this._callSubscriber (this._state);
+    } else if (action.type === 'UPDATE-POST') {
+      this._state.profilePage.newPostText = action.myNewText;
+      this._callSubscriber (this._state);
+    }
+  },
 };
 window.store = store;
 export default store;
