@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from '../Styles/Dialogs.module.css';
+import {sendMessageActionCreator, messageWindowChangeActionCreator} from '../redux/state'
 
 const DialogUser = (props) => {
   return <div className={classes.contact}>
@@ -17,6 +18,14 @@ const Message = (props) => {
 const Dialogs = (props) => {
   let dialogsArr = props.dialogs.map (dialog => <DialogUser name={dialog.name} id= {dialog.id}/>);
   let messagesArr = props.messages.map (item => <Message message={item.message} id= {item.id}/>);
+  let newMessageText = props.store.getState().messagesPage.newMessageText;
+  let sendMessage = () => {
+    props.store.dispatch (sendMessageActionCreator ())
+  }
+  let changeMessage = (e) => {
+    let messageText = e.target.value;
+    props.store.dispatch (messageWindowChangeActionCreator (messageText))
+  }
   return <div className={classes.dialogs}>
     <p>Беседы</p>
     <div className={classes.dialogs_wrapper}>
@@ -24,12 +33,12 @@ const Dialogs = (props) => {
         {dialogsArr}
       </div>
       <div className={classes.messages}>
-        {messagesArr}
+        <div>{messagesArr}</div>
       </div>
     </div>
     <div id={classes.sendTools}>
-      <textarea id={classes.postWindow} placeholder='Message...'></textarea> <br />
-      <button id={classes.btn}>Send</button>
+      <div><textarea id={classes.postWindow} value={newMessageText} onChange={changeMessage} placeholder='Message...'></textarea></div>
+      <div><button id={classes.btn} onClick={sendMessage}>Send</button></div>
     </div> 
   </div>
 };

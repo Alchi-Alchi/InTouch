@@ -1,16 +1,17 @@
 import React from 'react';
 import classes from '../Styles/Content.module.css';
 import Post from './Post';
+import {addPostActionCreator, postWindowChangeActionCreator} from '../redux/state'
 
 const Content = (props) => {
   let postsArr = props.myPosts.map (p => <Post message = {p.post}/>);
   let createPostWindow = React.createRef();
   let addPost = () => {
-    props.dispatch ({type: 'ADD-POST'});
+    props.dispatch (addPostActionCreator());
   }
   let textWindowChange = () => {
     let textPost = createPostWindow.current.value;
-    props.dispatch ({type: 'UPDATE-POST', myNewText: textPost});
+    props.dispatch (postWindowChangeActionCreator(textPost));
   }
   return (
   <div className={classes.content}>
