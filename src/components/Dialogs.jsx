@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from '../Styles/Dialogs.module.css';
-import {sendMessageActionCreator, messageWindowChangeActionCreator} from '../redux/state'
+import {sendMessageActionCreator, messageWindowChangeActionCreator} from '../redux/dialogsReducer'
 
 const DialogUser = (props) => {
   return <div className={classes.contact}>

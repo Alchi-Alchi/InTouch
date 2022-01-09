@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from '../Styles/Content.module.css';
 import Post from './Post';
-import {addPostActionCreator, postWindowChangeActionCreator} from '../redux/state'
+import {addPostActionCreator, postWindowChangeActionCreator} from '../redux/profileReducer'
 
 const Content = (props) => {
   let postsArr = props.myPosts.map (p => <Post message = {p.post}/>);
