@@ -18,7 +18,7 @@ const Message = (props) => {
 const Dialogs = (props) => {
   let dialogsArr = props.dialogs.map (dialog => <DialogUser name={dialog.name} id= {dialog.id}/>);
   let messagesArr = props.messages.map (item => <Message message={item.message} id= {item.id}/>);
-  let newMessageText = props.store.getState().messagesPage.newMessageText;
+  let newMessageText = props.store.getState().dialogsPage.newMessageText;
   let sendMessage = () => {
     props.store.dispatch (sendMessageActionCreator ())
   }
