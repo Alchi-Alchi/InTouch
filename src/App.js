@@ -4,8 +4,8 @@ import Logo from './components/Logo';
 import Menu from './components/Menu';
 import Profile from './components/Profile';
 import Contacts from './components/Contacts';
-import Dialogs from './components/Dialogs';
 import {Route} from 'react-router-dom';
+import DialogsContainer from './components/DialogsContainer';
 
 const App = (props) => {
   return (
@@ -13,11 +13,8 @@ const App = (props) => {
         <Logo/>
         <Menu/>
         <div className="app-wrapper_content">
-          <Route path='/profile' render = {() => <Profile profilePage = {props.state.profilePage}
-                                                          dispatch={props.dispatch}/>}/>
-          <Route path='/dialogs' render = {() => <Dialogs dialogs = {props.state.dialogsPage.usersData}
-                                                          messages = {props.state.dialogsPage.messagesData}
-                                                          store = {props.store}/>}/>
+          <Route path='/profile' render = {() => <Profile store = {props.store}/>}/>
+          <Route path='/dialogs' render = {() => <DialogsContainer store = {props.store}/>}/>
         </div>
         <Contacts/>
       </div>

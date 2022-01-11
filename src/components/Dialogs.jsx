@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import classes from '../Styles/Dialogs.module.css';
-import {sendMessageActionCreator, messageWindowChangeActionCreator} from '../redux/dialogsReducer'
 
 const DialogUser = (props) => {
   return <div className={classes.contact}>
@@ -16,15 +15,16 @@ const Message = (props) => {
 };
 
 const Dialogs = (props) => {
-  let dialogsArr = props.dialogs.map (dialog => <DialogUser name={dialog.name} id= {dialog.id}/>);
-  let messagesArr = props.messages.map (item => <Message message={item.message} id= {item.id}/>);
-  let newMessageText = props.store.getState().dialogsPage.newMessageText;
+  let state = props.dialogsPage;
+  let dialogsArr = state.usersData.map (dialog => <DialogUser name={dialog.name} id= {dialog.id}/>);
+  let messagesArr = state.messagesData.map (item => <Message message={item.message} id= {item.id}/>);
+  let newMessageText = state.newMessageText;
   let sendMessage = () => {
-    props.store.dispatch (sendMessageActionCreator ())
+    props.sendMessage();
   }
   let changeMessage = (e) => {
     let messageText = e.target.value;
-    props.store.dispatch (messageWindowChangeActionCreator (messageText))
+    props.messageWindowChange(messageText);
   }
   return <div className={classes.dialogs}>
     <p>Беседы</p>
