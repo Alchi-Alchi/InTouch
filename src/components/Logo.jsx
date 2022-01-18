@@ -9,6 +9,10 @@ const Logo = () => {
         <img src={logoIMG} alt="logo" />
         <p id={classes.logo_name}>InTouch</p>
       </div>
+      <div className={classes.searchTools}>
+        <textarea placeholder='Search...'></textarea>
+        <button>Поиск</button>
+      </div>
       <img src={avatar} id={classes.profileIMG} alt="I" />
     </div>
   </header>

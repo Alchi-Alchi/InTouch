@@ -1,4 +1,4 @@
-.name {
+.nameAndStatus {
   text-align: center;
   grid-area: name;
   background-color: rgba(230, 230, 230, 1);
@@ -6,4 +6,8 @@
 
 #name_content {
   font-size: 24px;
+}
+
+#status {
+  border-top: 1px dashed rgba(50, 50, 50, 1);
 }
