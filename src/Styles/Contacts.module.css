@@ -60,3 +60,22 @@
   color: rgba(0, 100, 100, 1);
   font-size: 18px;
 }
+
+.numbersOfPagesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.selectedPage {
+  font-weight: bold;
+  color: rgba(255, 0, 0, 1);
+}
+
+.numSpan {
+  font-size: 24px;
+  margin: 3px;
+}
+
+.numSpan:hover {
+  cursor: pointer;
+}
