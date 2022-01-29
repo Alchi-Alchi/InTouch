@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {followAC, unfollowAC, setContactsAC, setCurrentPageAC, setContactsTotalCountAC} from '../redux/contactsReducer'
+import {followAC, unfollowAC, setContactsAC, setCurrentPageAC, setContactsTotalCountAC, setIsFetchingAC} from '../redux/contactsReducer'
 import * as axios from "axios";
 import Contacts from "./Contacts";
+import Preloader from './General/Preloader';
 
 class ContactsAPIComponent extends React.Component {
   componentDidMount () {
+    this.props.setIsFetching (true);
     axios.get (`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then (response => {
+      this.props.setIsFetching (false);
       this.props.setContacts (response.data.items)
       this.props.setContactsTotalCount (response.data.totalCount)});
   }
@@ -15,12 +18,16 @@ class ContactsAPIComponent extends React.Component {
   }
   onPageChanges = (pageNum) => {
     this.props.setCurrentPage (pageNum);
+    this.props.setIsFetching (true);
     axios.get (`https://social-network.samuraijs.com/api/1.0/users?page=${pageNum}&count=${this.props.pageSize}`).then (response => {
+      this.props.setIsFetching (false);
       this.props.setContacts (response.data.items);
     });
   }
   render () {
     return (
+      <>
+      {this.props.isFetching ? <Preloader/> : null}
       <Contacts contactsCount={this.props.contactsCount} 
                 pageSize={this.props.pageSize} 
                 contacts={this.props.contacts} 
@@ -28,6 +35,7 @@ class ContactsAPIComponent extends React.Component {
                 onPageChanges={this.onPageChanges}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}/>
+      </>
     );
   };
 };
@@ -37,6 +45,7 @@ let mapStateToProps = (state) => {
     pageSize:state.contactsPage.pageSize,
     contactsCount:state.contactsPage.contactsCount,
     currentPage: state.contactsPage.currentPage,
+    isFetching: state.contactsPage.isFetching,
   }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -55,6 +64,9 @@ let mapDispatchToProps = (dispatch) => {
     },
     setContactsTotalCount: (contactsCount) => {
       dispatch (setContactsTotalCountAC (contactsCount));
+    },
+    setIsFetching: (isFetching) => {
+      dispatch (setIsFetchingAC (isFetching));
     },
   }
 }
