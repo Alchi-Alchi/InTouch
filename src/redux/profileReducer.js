@@ -1,11 +1,13 @@
 const ADD_POST = 'ADD_POST';
 const UPDATE_POST = 'UPDATE-POST';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 let initialState = {
   myPosts : [
     {id: 1, post: "Hi everyone!"},
     {id: 2, post: "I'm here now)"}
   ],
   newPostText: '',
+  profile: null,
 };
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -24,6 +26,11 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         newPostText: action.myNewText
       };
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        profile: action.profile
+      };
     default:
       return state;  
   }
@@ -36,5 +43,9 @@ export const postWindowChangeActionCreator = (textPost) => {
   return {type: UPDATE_POST,
           myNewText: textPost
   }
+};
+
+export const setUserProfile = (profile) => {
+  return {type: SET_USER_PROFILE, profile}
 };
 export default profileReducer;

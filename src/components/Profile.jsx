@@ -10,7 +10,7 @@ const Profile = (props) => {
   <div className={classes.profile}>
     <Photo/>
     <Name/>
-    <Info/>
+    <Info profile={props.profile}/>
     <ContentContainer store={store}/>
   </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {followAC, unfollowAC, setContactsAC, setCurrentPageAC, setContactsTotalCountAC, setIsFetchingAC} from '../redux/contactsReducer'
+import {follow, unfollow, setContacts, setCurrentPage, setContactsTotalCount, setIsFetching} from '../redux/contactsReducer'
 import * as axios from "axios";
 import Contacts from "./Contacts";
 import Preloader from './General/Preloader';
@@ -48,29 +48,13 @@ let mapStateToProps = (state) => {
     isFetching: state.contactsPage.isFetching,
   }
 }
-let mapDispatchToProps = (dispatch) => {
-  return {
-    follow: (userID) => {
-      dispatch (followAC (userID));
-    },
-    unfollow: (userID) => {
-      dispatch (unfollowAC (userID));
-    },
-    setContacts: (contacts) => {
-      dispatch (setContactsAC (contacts));
-    },
-    setCurrentPage: (currentPage) => {
-      dispatch (setCurrentPageAC (currentPage));
-    },
-    setContactsTotalCount: (contactsCount) => {
-      dispatch (setContactsTotalCountAC (contactsCount));
-    },
-    setIsFetching: (isFetching) => {
-      dispatch (setIsFetchingAC (isFetching));
-    },
-  }
-}
-const ContactsContainer = connect (mapStateToProps, mapDispatchToProps) (ContactsAPIComponent);
+
+const ContactsContainer = connect (mapStateToProps, {follow,
+                                                    unfollow,
+                                                    setContacts,
+                                                    setCurrentPage,
+                                                    setContactsTotalCount,
+                                                    setIsFetching,}) (ContactsAPIComponent);
 export default ContactsContainer;
 // const Contact = (props) => {
   // let getContacts = () => {
@@ -105,3 +89,26 @@ export default ContactsContainer;
   // );
 // };
 // export default Contact;
+
+// let mapDispatchToProps = (dispatch) => {
+//   return {
+//     follow: (userID) => {
+//       dispatch (followAC (userID));
+//     },
+//     unfollow: (userID) => {
+//       dispatch (unfollowAC (userID));
+//     },
+//     setContacts: (contacts) => {
+//       dispatch (setContactsAC (contacts));
+//     },
+//     setCurrentPage: (currentPage) => {
+//       dispatch (setCurrentPageAC (currentPage));
+//     },
+//     setContactsTotalCount: (contactsCount) => {
+//       dispatch (setContactsTotalCountAC (contactsCount));
+//     },
+//     setIsFetching: (isFetching) => {
+//       dispatch (setIsFetchingAC (isFetching));
+//     },
+//   }
+// }

@@ -1,5 +1,7 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import classes from "../Styles/Contacts.module.css";
+import defaultIMG from '../images/unknown.png'
 let Contacts = (props) => {
   let pagesCount = Math.ceil (props.contactsCount / props.pageSize);
   let pages = [];
@@ -9,7 +11,7 @@ let Contacts = (props) => {
   let contactsArr = props.contacts.map (user => <div key={user.id} id={classes.contactsWrapper}>
     <div id={classes.userAvatarAndName}>
       <span>
-        <img src={user.photo} id={classes.photo}/>
+        <NavLink to={'/profile/' + user.id}><img src={user.photos ? defaultIMG: null} id={classes.photo}/></NavLink>
         <div>
           {user.followed ? <button id={classes.followButton} onClick={() => props.unfollow (user.id)}>Unfollow</button>:<button id={classes.followButton} onClick={() => props.follow (user.id)}>Follow</button>}
         </div>
