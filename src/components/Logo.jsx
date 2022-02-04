@@ -1,8 +1,8 @@
 import React from 'react';
 import logoIMG from '../images/logo.png';
-import avatar from '../images/myAvatar.png';
 import classes from '../Styles/Logo.module.css';
-const Logo = () => {
+import { NavLink } from "react-router-dom";
+const Logo = (props) => {
   return <header className={classes.header}>
     <div id={classes.headerContent_wrapper}>
       <div id={classes.logo}>
@@ -13,7 +13,9 @@ const Logo = () => {
         <textarea placeholder='Search...'></textarea>
         <button>Поиск</button>
       </div>
-      <img src={avatar} id={classes.profileIMG} alt="I" />
+      <div className={classes.loginBlock}>
+        {props.isAuth ? props.login : <NavLink to={'/login'} >Login</NavLink>}
+      </div>
     </div>
   </header>
 };

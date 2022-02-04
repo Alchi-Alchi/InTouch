@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
-import Logo from './components/Logo';
 import Menu from './components/Menu';
 import ContactsContainer from './components/ContactsContainer';
 import News from './components/News';
 import {Route} from 'react-router-dom';
 import DialogsContainer from './components/DialogsContainer';
 import ProfileContainer from './components/ProfileContainer';
+import LogoContainer from './components/LogoContainer';
 
 const App = (props) => {
   return (
       <div className="app-wrapper">
-        <Logo/>
+        <LogoContainer/>
         <Menu/>
         <div className="app-wrapper_content">
           <Route path='/profile/:userID?' render = {() => <ProfileContainer store = {props.store}/>}/>
