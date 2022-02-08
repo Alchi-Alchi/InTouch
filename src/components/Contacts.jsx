@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import classes from "../Styles/Contacts.module.css";
 import defaultIMG from '../images/unknown.png'
-import * as axios from "axios";
 let Contacts = (props) => {
   let pagesCount = Math.ceil (props.contactsCount / props.pageSize);
   let pages = [];
@@ -14,19 +13,8 @@ let Contacts = (props) => {
       <span>
         <NavLink to={'/profile/' + user.id}><img src={user.photos ? defaultIMG: null} id={classes.photo}/></NavLink>
         <div>
-          {user.followed ? <button id={classes.followButton} onClick={() => {
-            axios.delete (`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {withCredentials: true, headers: {"API-KEY": "c2f567ce-7fc3-4b67-8cde-c469247b6b42"}}).then (response => {
-              if (response.data.resultCode == 0) {
-                props.unfollow (user.id);
-              }
-            });
-          }}>Unfollow</button>:<button id={classes.followButton} onClick={() => {
-            axios.post (`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {withCredentials: true, headers: {"API-KEY": "c2f567ce-7fc3-4b67-8cde-c469247b6b42"}}).then (response => {
-              if (response.data.resultCode == 0) {
-                props.follow (user.id);
-              }
-            });
-          }}>Follow</button>}
+          {user.followed ? <button id={classes.followButton} disabled={props.followingProcess.some (id => id === user.id)} onClick={() => {props.unfollow (user.id)}}>Unfollow</button>
+          :<button id={classes.followButton} disabled={props.followingProcess.some (id => id === user.id)} onClick={() => {props.follow (user.id)}}>Follow</button>}
         </div>
       </span>
       <span>

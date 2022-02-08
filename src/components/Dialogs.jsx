@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink,  Redirect } from 'react-router-dom';
 import classes from '../Styles/Dialogs.module.css';
 
 const DialogUser = (props) => {
@@ -25,6 +25,9 @@ const Dialogs = (props) => {
   let changeMessage = (e) => {
     let messageText = e.target.value;
     props.messageWindowChange(messageText);
+  }
+  if (!props.isAuth) {
+    return <Redirect to={"/login"}/>
   }
   return <div className={classes.dialogs}>
     <p>Беседы</p>

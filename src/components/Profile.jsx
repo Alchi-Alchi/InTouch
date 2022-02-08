@@ -5,7 +5,11 @@ import Name from './Name';
 import Info from './Info';
 import ContentContainer from './ContentContainer';
 import store from '../redux/reduxStore';
+import { Redirect } from 'react-router-dom';
 const Profile = (props) => {
+  if (!props.isAuth) {
+    return <Redirect to={"/login"}/>
+  }
   return (
   <div className={classes.profile}>
     <Photo/>
