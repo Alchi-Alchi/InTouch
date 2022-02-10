@@ -26,9 +26,6 @@ const Dialogs = (props) => {
     let messageText = e.target.value;
     props.messageWindowChange(messageText);
   }
-  if (!props.isAuth) {
-    return <Redirect to={"/login"}/>
-  }
   return <div className={classes.dialogs}>
     <p>Беседы</p>
     <div className={classes.dialogs_wrapper}>
