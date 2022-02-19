@@ -4,11 +4,13 @@ import authReducer from "./authReducer";
 import contactsReducer from "./contactsReducer";
 import dialogsReducer from "./dialogsReducer";
 import profileReducer from "./profileReducer";
+import {reducer as formReducer} from "redux-form"
 let reducers = combineReducers ({
   profilePage: profileReducer,
   dialogsPage: dialogsReducer,
   contactsPage: contactsReducer,
-  auth: authReducer
+  auth: authReducer,
+  form: formReducer,
 });
 let store = createStore (reducers, applyMiddleware(thunkMiddleware));
 window.store = store;

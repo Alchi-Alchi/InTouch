@@ -1,21 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {sendMessageActionCreator, messageWindowChangeActionCreator} from '../redux/dialogsReducer'
+import {sendMessageActionCreator} from '../redux/dialogsReducer'
 import Dialogs from './Dialogs';
 import { withAuthRedirect } from '../HOC/withAuthRedirect';
 import { compose } from 'redux';
-
-// const DialogsContainer = (props) => {
-//   let sendMessage = () => {
-//     props.store.dispatch (sendMessageActionCreator ());
-//   }
-//   let messageWindowChange = (messageText) => {
-//     props.store.dispatch (messageWindowChangeActionCreator (messageText));
-//   }
-//   return (
-//     <Dialogs sendMessage = {sendMessage} messageWindowChange = {messageWindowChange} dialogsPage = {props.store.getState().dialogsPage}/>
-//   )
-// };
 
 let mapStateToProps = (state) => {
   return {
@@ -24,11 +12,8 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
   return {
-    sendMessage: () => {
-      dispatch (sendMessageActionCreator ());
-    },
-    messageWindowChange: (messageText) => {
-      dispatch (messageWindowChangeActionCreator (messageText));
+    sendMessage: (newMessageText) => {
+      dispatch (sendMessageActionCreator (newMessageText));
     },
   }
 }
