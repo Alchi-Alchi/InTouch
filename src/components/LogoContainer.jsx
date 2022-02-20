@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from './Logo';
 import { getUserData } from '../redux/authReducer';
 import { connect } from 'react-redux';
+import { logout } from '../redux/authReducer';
 class LogoContainer extends React.Component {
   componentDidMount () {
     this.props.getUserData ();
@@ -14,4 +15,4 @@ const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
   login: state.auth.login,
 });
-export default connect (mapStateToProps, {getUserData}) (LogoContainer);
+export default connect (mapStateToProps, {getUserData, logout}) (LogoContainer);

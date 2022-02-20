@@ -30,3 +30,21 @@
   font-size: 24px;
   font-weight: bold;
 }
+
+.logoutBtnDiv {
+  text-align: center;
+}
+
+.logoutBtn {
+  background: linear-gradient(45deg, rgba(100, 150, 200, 1), rgba(255, 255, 255, 1));
+  padding: 5px 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px 3px rgba(100, 150, 200, 1);
+  cursor: pointer;
+}
+
+.logoutBtn:active {
+  box-shadow: none;
+}

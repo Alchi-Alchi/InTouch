@@ -1,9 +1,14 @@
 .nameAndStatus {
-  text-align: center;
   grid-area: name;
   background-color: rgba(230, 230, 230, 1);
 }
 
 #name_content {
   font-size: 24px;
+  text-align: center;
+}
+
+#status {
+  padding: 10px;
+  background-color: rgba(200, 200, 200, 1);
 }

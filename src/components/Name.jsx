@@ -4,7 +4,7 @@ import ProfileStatus from './ProfileStatus';
 const Name = (props) => {
   return <div className={classes.nameAndStatus}>
     <div id={classes.name_content}><p>Call me Pawel</p></div>
-    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+    <div id={classes.status}><ProfileStatus status={props.status} updateStatus={props.updateStatus}/></div>
   </div>
 };
 export default Name;

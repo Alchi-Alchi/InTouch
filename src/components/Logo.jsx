@@ -14,7 +14,9 @@ const Logo = (props) => {
         <button>Поиск</button>
       </div>
       <div className={classes.loginBlock}>
-        {props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+        {props.isAuth ? <div>
+          {props.login}<div className={classes.logoutBtnDiv}><button className={classes.logoutBtn} onClick={props.logout}>Log out</button></div>
+        </div> : <NavLink to={'/login'}>Login</NavLink>}
       </div>
     </div>
   </header>

@@ -1,13 +1,13 @@
 .formControl {
-
+  margin: 5px;
 }
 
 .error input {
-  border: 1px solid red;
+  border: 1px solid darkred;
 }
 
 .error span {
   font-style: italic;
   font-size: 20px;
-  color: red;
+  color: darkred;
 }
