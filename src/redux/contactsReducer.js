@@ -68,10 +68,10 @@ export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, current
 export const setContactsTotalCount = (contactsCount) => ({type: SET_CONTACTS_TOTAL_COUNT, contactsCount});
 export const setIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const setFollowingProcess = (followingProcess, userID) => ({type: TOGGLE_IS_FOLLOWING_PROCESS, followingProcess, userID});
-export const getUsers = (currentPage, pageSize) => {
+export const getUsers = (page, pageSize) => {
   return (dispatch) => {
     dispatch (setIsFetching (true));
-    usersAPI.getUsers(currentPage, pageSize).then (data => {
+    usersAPI.getUsers(page, pageSize).then (data => {
       dispatch (setIsFetching (false));
       dispatch (setContacts (data.items));
       dispatch (setContactsTotalCount (data.totalCount))

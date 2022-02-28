@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {follow, unfollow, setCurrentPage, getUsers} from '../redux/contactsReducer'
+import {getContacts, getPageSize, getContactsCount, getCurrentPage, getIsFetching, getFollowingProcess,} from '../redux/contactsSelectors';
 import Contacts from "./Contacts";
 import Preloader from './General/Preloader';
 
@@ -34,12 +35,12 @@ class ContactsAPIComponent extends React.Component {
 };
 let mapStateToProps = (state) => {
   return {
-    contacts: state.contactsPage.contacts,
-    pageSize:state.contactsPage.pageSize,
-    contactsCount:state.contactsPage.contactsCount,
-    currentPage: state.contactsPage.currentPage,
-    isFetching: state.contactsPage.isFetching,
-    followingProcess: state.contactsPage.followingProcess,
+    contacts: getContacts (state),
+    pageSize: getPageSize (state),
+    contactsCount:getContactsCount (state),
+    currentPage: getCurrentPage (state),
+    isFetching: getIsFetching (state),
+    followingProcess: getFollowingProcess (state),
   }
 }
 

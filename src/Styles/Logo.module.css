@@ -48,3 +48,7 @@
 .logoutBtn:active {
   box-shadow: none;
 }
+
+.logoutBtn:hover {
+  box-shadow: 1px 1px 5px 5px rgba(100, 150, 200, 1);;
+}
