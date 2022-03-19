@@ -12,6 +12,9 @@ import { initializeApp } from './redux/appReducer';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import Preloader from './components/General/Preloader';
+import store from './redux/reduxStore';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 class App extends Component {
   componentDidMount () {
     this.props.initializeApp ();
@@ -38,4 +41,14 @@ class App extends Component {
 const mapStateToProps = (state) => ({
   initialized: state.app.initialized
 });
-export default compose (withRouter, connect (mapStateToProps, {initializeApp})) (App);
+let AppContainer = compose (withRouter, connect (mapStateToProps, {initializeApp})) (App);
+const InTouchApp = (props) => {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter>
+  )
+};
+export default InTouchApp;

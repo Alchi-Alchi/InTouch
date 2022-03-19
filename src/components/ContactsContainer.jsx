@@ -7,14 +7,16 @@ import Preloader from './General/Preloader';
 
 class ContactsAPIComponent extends React.Component {
   componentDidMount () {
-    this.props.getUsers (this.props.currentPage, this.props.pageSize);
+    const {currentPage, pageSize} = this.props;
+    this.props.getUsers (currentPage, pageSize);
   }
   constructor (props) {
     super (props);
   }
   onPageChanges = (pageNum) => {
+    const {pageSize} = this.props;
     this.props.setCurrentPage (pageNum);
-    this.props.getUsers (pageNum, this.props.pageSize);
+    this.props.getUsers (pageNum, pageSize);
   }
   render () {
     return (
@@ -42,12 +44,8 @@ let mapStateToProps = (state) => {
     isFetching: getIsFetching (state),
     followingProcess: getFollowingProcess (state),
   }
-}
-
-const ContactsContainer = connect (mapStateToProps, {follow,
-                                                    unfollow,
-                                                    setCurrentPage,
-                                                    getUsers}) (ContactsAPIComponent);
+};
+const ContactsContainer = connect (mapStateToProps, {follow, unfollow, setCurrentPage, getUsers}) (ContactsAPIComponent);
 export default ContactsContainer;
 // let mapDispatchToProps = (dispatch) => {
 //   return {

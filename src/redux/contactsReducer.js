@@ -1,4 +1,5 @@
 import { usersAPI } from '../api/api';
+import { updateObjectInArray } from '../utils/followUnfollowHelper';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_CONTACTS = 'SET_CONTACTS';
@@ -8,7 +9,7 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING_PROCESS = 'TOGGLE_IS_FOLLOWING_PROCESS';
 let initialState = {
   contacts : [],
-  pageSize: 5,
+  pageSize: 7,
   contactsCount: 0,
   currentPage: 1,
   isFetching: false,
@@ -19,23 +20,13 @@ const contactsReducer = (state = initialState, action) => {
     case FOLLOW:
       return {
         ...state,
-        contacts: state.contacts.map (user => {
-          if (user.id === action.userID) {
-            return {...user, followed: true}
-          }
-          return user;
-        })
+        contacts: updateObjectInArray (state.contacts, action.userID, "id", {followed: true})
       };
       
     case UNFOLLOW:
       return {
         ...state,
-        contacts: state.contacts.map (user => {
-          if (user.id === action.userID) {
-            return {...user, followed: false}
-          }
-          return user;
-        })
+        contacts: updateObjectInArray (state.contacts, action.userID, "id", {followed: false})
       };
 
     case SET_CONTACTS:
@@ -69,37 +60,30 @@ export const setContactsTotalCount = (contactsCount) => ({type: SET_CONTACTS_TOT
 export const setIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const setFollowingProcess = (followingProcess, userID) => ({type: TOGGLE_IS_FOLLOWING_PROCESS, followingProcess, userID});
 export const getUsers = (page, pageSize) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch (setIsFetching (true));
-    usersAPI.getUsers(page, pageSize).then (data => {
-      dispatch (setIsFetching (false));
-      dispatch (setContacts (data.items));
-      dispatch (setContactsTotalCount (data.totalCount))
-    });
+    let data = await usersAPI.getUsers(page, pageSize);
+    dispatch (setIsFetching (false));
+    dispatch (setContacts (data.items));
+    dispatch (setContactsTotalCount (data.totalCount))
   }
+};
+const followUnfollowFunction = async (dispatch, userID, apiMethod, actionCreator) => {
+    dispatch (setFollowingProcess (true, userID));
+    let response = await apiMethod(userID);
+    if (response.data.resultCode == 0) {
+      dispatch (actionCreator(userID));
+    }
+    dispatch (setFollowingProcess (false, userID));
 }
 export const follow = (userID) => {
-  return (dispatch) => {
-    dispatch (setFollowingProcess (true, userID));
-    usersAPI.follow (userID)
-    .then (response => {
-      if (response.data.resultCode == 0) {
-        dispatch (followSuccess (userID));
-      }
-      dispatch (setFollowingProcess (false, userID));
-    });
+  return async (dispatch) => {
+    followUnfollowFunction (dispatch, userID, usersAPI.follow.bind(usersAPI), followSuccess);
   }
-}
+};
 export const unfollow = (userID) => {
-  return (dispatch) => {
-    dispatch (setFollowingProcess (true, userID));
-    usersAPI.unfollow (userID)
-    .then (response => {
-      if (response.data.resultCode == 0) {
-        dispatch (unfollowSuccess (userID));
-      }
-      dispatch (setFollowingProcess (false, userID));
-    });
+  return async (dispatch) => {
+    followUnfollowFunction (dispatch, userID, usersAPI.unfollow.bind(usersAPI), unfollowSuccess);
   }
-}
+};
 export default contactsReducer;
