@@ -23,7 +23,7 @@ class ContactsAPIComponent extends React.Component {
       <>
       {this.props.isFetching ? <Preloader/> : null}
       <Contacts contactsCount={this.props.contactsCount} 
-                pageSize={this.props.pageSize} 
+                pageSize={this.props.pageSize}
                 contacts={this.props.contacts} 
                 currentPage={this.props.currentPage}
                 onPageChanges={this.onPageChanges}
