@@ -46,7 +46,7 @@ const mapStateToProps = (state) => ({
 let AppContainer = compose (withRouter, connect (mapStateToProps, {initializeApp})) (App);
 const InTouchApp = (props) => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Provider store={store}>
         <AppContainer />
       </Provider>
