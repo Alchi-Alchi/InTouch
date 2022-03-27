@@ -37,11 +37,11 @@ let Contacts = (props) => {
         <p>Контакты</p>
         {contactsArr}
         <div className={classes.numbersOfPagesWrapper}>
-          {portionNumber >1 && <button onClick={() => {setPortionNumber (portionNumber - 1)}}>PREV</button>}
+          {portionNumber >1 && <button onClick={() => {setPortionNumber (portionNumber - 1)}} id={classes.pageButton}>PREV</button>}
           {pages.filter (page => page >= leftPortionPageNum && page <= rightPortionPageNum).map (page => {
             return <span className={`${props.currentPage === page && classes.selectedPage} ${classes.numSpan}`} onClick={(e) => {props.onPageChanges (page)}}>{page}</span>
           })}
-          {portionCount > portionNumber && <button onClick={() => {setPortionNumber (portionNumber + 1)}}>NEXT</button>}
+          {portionCount > portionNumber && <button onClick={() => {setPortionNumber (portionNumber + 1)}} id={classes.pageButton}>NEXT</button>}
         </div>
       </div>
     );
