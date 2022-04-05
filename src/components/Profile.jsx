@@ -8,7 +8,7 @@ import store from '../redux/reduxStore';
 const Profile = (props) => {
   return (
   <div className={classes.profile}>
-    <Photo/>
+    <Photo isOwner={props.isOwner} profile={props.profile} savePhoto={props.savePhoto}/>
     <Name status={props.status} updateStatus={props.updateStatus}/>
     <Info profile={props.profile}/>
     <ContentContainer store={store}/>

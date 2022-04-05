@@ -2,3 +2,8 @@
   grid-area: photo;
   background-color: rgba(230, 230, 230, 1);
 }
+
+.avatar {
+  width: inherit;
+  height: inherit;
+}

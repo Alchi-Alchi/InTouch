@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from '../Styles/Info.module.css';
 import Preloader from './General/Preloader';
-const Info = (props) => {
-  if (!props.profile) {
+const Info = ({profile}) => {
+  if (!profile) {
     return <Preloader/>
   }
   return <div className={classes.info}>
