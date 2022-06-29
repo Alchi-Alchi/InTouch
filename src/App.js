@@ -15,11 +15,19 @@ import Preloader from './components/General/Preloader';
 import store from './redux/reduxStore';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { Switch } from 'react-router-dom';
 const DialogsContainer = React.lazy (() => import ('./components/DialogsContainer'));
 const ProfileContainer = React.lazy (() => import ('./components/ProfileContainer'));
 class App extends Component {
+  catchAllUnhandledErrors = (promiseRejectionEvent) => {
+    console.error (promiseRejectionEvent);
+  }
   componentDidMount () {
     this.props.initializeApp ();
+    window.addEventListener ("unhandledrejection", this.catchAllUnhandledErrors)
+  }
+  componentWillUnmount () {
+    window.removeEventListener ("unhandledrejection", this.catchAllUnhandledErrors)
   }
   render () {
     if (!this.props.initialized) {
@@ -30,10 +38,13 @@ class App extends Component {
         <LogoContainer/>
         <Menu/>
         <div className="app-wrapper_content">
-          <Route path='/profile/:userID?' render = {() => {return <React.Suspense fallback={<div>Loading...</div>}><ProfileContainer/></React.Suspense> }}/>
-          <Route path='/dialogs' render = {() => {return <React.Suspense fallback={<div>Loading...</div>}><DialogsContainer/></React.Suspense> }}/>
-          <Route path='/contacts' render = {() => <ContactsContainer/>}/>
-          <Route path='/login' render = {() => <Login />}/>
+          <Switch>
+            <Route path='/profile/:userID?' render = {() => {return <React.Suspense fallback={<div>Loading...</div>}><ProfileContainer/></React.Suspense> }}/>
+            <Route path='/dialogs' render = {() => {return <React.Suspense fallback={<div>Loading...</div>}><DialogsContainer/></React.Suspense> }}/>
+            <Route path='/contacts' render = {() => <ContactsContainer/>}/>
+            <Route path='/login' render = {() => <Login />}/>
+            <Route path='*' render = {() => <div>404 NOT FOUND</div>}/>
+          </Switch>
         </div>
         <News/>
       </div>

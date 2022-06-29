@@ -14,6 +14,8 @@ const LoginForm = (props) => {
       <div><Field placeholder={"Email"} component={Input} name={"email"} validate={[required, maxLength,]}/></div>
       <div><Field placeholder={"Password"} component={Input} name={"password"} validate={[required, maxLength,]} type={"password"}/></div>
       <div><Field component={Input} type={"checkbox"} name={"rememberMe"}/><span>Remember me</span></div>
+      {props.captchaURL && <img src={props.captchaURL}/>}
+      {props.captchaURL && <div><Field placeholder={"Symbols from image"} component={Input} name={"captcha"} validate={[required]}/></div>}
       <div><button>Send</button></div>
     </form>
   )
@@ -21,7 +23,7 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm ({form: 'login'}) (LoginForm);
 const Login = (props) => {
   const onSubmit = (formData) => {
-    props.login (formData.email, formData.password, formData.rememberMe)
+    props.login (formData.email, formData.password, formData.rememberMe, formData.captcha)
   };
   if (props.isAuth) {
     return <Redirect to={"/profile"}/>
@@ -30,11 +32,13 @@ const Login = (props) => {
     <h1>Авторизация</h1>
     <div className={classes.authBlock}>
       <p>Авторизируйтесь, чтобы просматривать эту страницу</p>
-      <LoginReduxForm onSubmit={onSubmit}/>
+      {console.log (props.captchaURL)}
+      <LoginReduxForm onSubmit={onSubmit} captchaURL={props.captchaURL}/>
     </div>
   </div>
 };
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
+  captchaURL: state.auth.captchaURL,
 })
 export default connect (mapStateToProps, {login}) (Login);
